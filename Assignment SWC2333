@@ -1,0 +1,136 @@
+/**
+ * Program description : to display appointment details 
+ * Programmer : AA
+ * Date : 05 FEBRUARY 2024
+ */
+
+//import the respective package
+import javax.swing.JOptionPane;
+
+public class Appointment
+{
+    //Declaration of the instance variables
+    private String patientName;
+    private String apptDate;
+    private String apptTime;
+    private String dentistName;
+    
+    //Declaration of a constant variable
+    final double PRICE_PLAIN_PAPER = 0.08;
+    
+    //Constructor without param
+    public Appointment()
+    {
+        patientName = null; //title = "";//empty string
+        apptDate = null;
+        apptTime = null;   
+        dentistName = null;
+    }//end of constructor
+
+    //Constructor with param /normal constructor
+    public Appointment(String patientName, String apptDate, String apptTime,
+    String dentistName)
+    {
+        this.patientName = patientName;
+        this.apptDate = apptDate;
+        this.apptTime = apptTime;
+        this.dentistName = dentistName;
+    }//end of constructor
+    
+    //Accessor/retriever/getter
+    public String getPatientName()
+    {
+        return patientName;        
+    }//end of accessor
+    
+    public String getApptDate()
+    {
+        return apptDate;
+    }//end of accesssor
+    
+    public String getApptTime()
+    {
+        return apptTime;
+    }//end of accessor
+    
+    //Mutator for all data members
+    public void setMagazine(String patientName, String apptDate, String apptTime, 
+    String dentistName)
+    {
+        this.patientName = patientName;
+        this.apptDate = apptDate;
+        this.apptTime = apptTime;
+        this.dentistName = dentistName;   
+    }//end of mutator
+        
+    //toString method
+    public String toString()
+    {
+        return ( "Appointment Details: \n" +
+                "Patient Name: " + patientName + "\n" +
+                "Appointment Date: " + apptDate + "\n" +
+                "Appointment Time: " + apptTime + "\n" +
+                "Dentist Name: " + dentistName + "\n");
+
+    }//end of toString
+}//end of class
+
+/**
+ * Program description : to display appointment details 
+ * Programmer : AA
+ * Date : 05 FEBRUARY 2024
+ */
+//import the respective package
+import javax.swing.JOptionPane;
+
+public class BookingSystem
+{
+    //Driver method
+    public static void main(String[] args)
+    {
+        //Declaration of an array of size 20 named appoinments
+        Appointment[] appointments = new Appointment[3];
+        
+        //Declaration of all variables
+        String patientName, apptDate, apptTime, dentistName;
+                
+        for(int i = 0; i < 3; i++)
+        {
+            patientName = JOptionPane.showInputDialog("Enter the patient name for Appointment " + (i+1) + " : ");
+            apptDate = JOptionPane.showInputDialog("Enter the appointment date(DD-MM-YYYY)for Appointment " + (i+1) + ": ");
+            apptTime = JOptionPane.showInputDialog("Enter the appointment time for Appointment " + (i+1) + " : ");
+            dentistName = JOptionPane.showInputDialog("Enter dentist name for Appoinment" + (i+1) + " : ");
+           
+            //Instantiate each element of the array
+            appointments[i] = new Appointment(patientName, apptDate, apptTime, dentistName);
+        }
+             // Display all appointment details
+            System.out.println("All Appointment Details:");
+        for (Appointment appointment : appointments) 
+        {
+            System.out.println(appointment);
+        }//end of for
+
+        // Search for appointments by date
+        String searchDate = JOptionPane.showInputDialog("Enter a date to search for appointments (DD-MM-YYYY): ");
+        System.out.println("Appointments scheduled for " + searchDate + ":");
+        for (Appointment appointment : appointments) 
+        {
+            if (appointment.getApptDate().equals(searchDate)) 
+            {
+                System.out.println(appointment);
+            }//enf of if
+        }//end of for
+         // Implement method to cancel a specific appointment
+        int cancelIndex = Integer.parseInt(JOptionPane.showInputDialog("Enter the index of the appointment to cancel: "));
+        if (cancelIndex >= 0 && cancelIndex < appointments.length) 
+        {
+            appointments[cancelIndex] = null;
+            System.out.println("Appointment at index " + cancelIndex + " has been cancelled.");
+        }//end of if
+        else 
+        {
+            System.out.println("Invalid index.");
+        }//end of else
+    }//end of main
+}//end of class
